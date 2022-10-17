@@ -18,15 +18,15 @@ class Core(object):
             if self.check != "y":
                 self.interface = input("[CHANGE] wlan0 or wlan1 >> ")
                 os.system(f"sudo airmon-ng start {self.interface}")
-                self.beacon()
+                time.sleep(1.5)
+                os.system(f"sudo mdk3 {self.interface} b -c 1 -f nets.lst -g -t -m -a -s 9999999")
             else:
                 os.system(f"sudo airmon-ng start {self.interface}")
-                self.beacon()
+                time.sleep(1.5)
+                os.system(f"sudo mdk3 {self.interface} b -c 1 -f nets.lst -g -t -m -a -s 9999999")
         else:
             print("Error! Try again.")
 
-    def beacon(self):
-        os.system(f"sudo mdk3 {self.interface} b -c 1 -f nets.lst -g -t -m -a -s 9999999")
 
 while True:
     run = Core()
